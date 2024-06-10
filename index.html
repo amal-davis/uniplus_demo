@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Uniplus</title>
+</head>
+<style>
+    html, body {
+      overflow-x: hidden; /* Prevent horizontal overflow */
+      width: 100%; /* Ensure width is 100% */
+      box-sizing: border-box; /* Ensure consistent box-sizing */
+    }
+/* Navbar styles */
+/* Navbar styles */
+/* Navbar styles */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar is above other content */
+    background-color: #8BACBC;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar.scrolled {
+    background-color: #8BACBC !important;
+}
+
+.navbar.scrolled .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.navbar.toggled {
+    background-color: #8BACBC;
+}
+
+.navbar.toggled .navbar-nav .nav-link {
+    color: white;
+}
+
+/* Section overlap */
+.section-next {
+    margin-top: -80px; /* Adjust this value based on your navbar height */
+    padding-top: 100px; /* Adjust this value based on your needs */
+}
+
+/* Navbar brand */
+.navbar-brand {
+    font-size: 1.4em;
+}
+
+/* Navbar links */
+.navbar-dark .navbar-nav a.nav-link {
+    color: #000000;
+    font-size: 1.1em;
+}
+
+/* Mega menu */
+.mega-menu {
+    width: 50vw; /* Increase the width of the mega menu */
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: 100%;
+    padding: 1em 1.5em;
+    border-radius: 0;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    display: none;
+}
+
+.nav-item.dropdown:hover .mega-menu {
+    display: block;
+}
+
+.mega-menu .row {
+    display: flex;
+    gap: 1em; /* Adjust the gap between columns */
+}
+
+.mega-menu .col-md-4 {
+    flex: 1; /* Ensure columns take up equal space */
+    min-width: 200px; /* Minimum width to prevent collapsing */
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown-menu li .dropdown-item {
+    color: gray;
+    font-size: 1em;
+    padding: 0.5em 1em;
+}
+
+.dropdown-menu li .dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-menu li:first-child a {
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    color: #516beb;
+}
+
+.dropdown-menu li:first-child a:hover {
+    background-color: #f1f1f1;
+}
+
+@media only screen and (max-width: 992px) {
+    .mega-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .navbar-collapse {
+        background-color: #8BACBC !important;
+    }
+
+    .navbar-collapse .nav-link {
+        color: #000000 !important;
+    }
+
+    .dropdown-menu.show {
+        max-height: 60vh;
+        overflow-y: scroll;
+    }
+}
+
+/* Navbar toggle button */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1140px) {
+    .dropdown:hover .mega-menu {
+        width: 60vw;
+        flex-wrap: wrap;
+    }
+}
+
+.dropdown-menu {
+    border-radius: 0;
+    border: none;
+    padding: 0.5em;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown-menu li a {
+    color: gray;
+    padding: 0.5em 1em;
+}
+
+.dropdown-menu li:first-child a {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #516beb;
+}
+
+@media screen and (min-width: 993px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    .dropdown-menu.show {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .dropdown-menu.show {
+        max-height: 60vh;
+        overflow-y: scroll;
+    }
+}
+
+
+
+
+.accordion {
+    border-radius: 10px; /* Adjust the border radius for the entire accordion */
+    overflow: hidden; /* Ensure content doesn't overflow the rounded corners */
+}
+
+.accordion-item {
+    border: none; /* Remove individual item borders */
+    margin-bottom: 0; /* Remove bottom margin */
+    margin-top: 15px;
+}
+
+.accordion-button {
+    background-color: #cce3ee !important; /* Set your desired background color */
+    border: 1px solid #ccc; /* Add border color to buttons */
+    border-radius: 10px;
+    color: #000; /* Set text color */
+}
+
+.accordion-button.collapsed {
+    background-color: #fff; /* Set background color for collapsed state */
+}
+
+.accordion-button:focus {
+    box-shadow: none; /* Remove focus outline */
+}
+
+.accordion-item:first-child .accordion-button {
+    border-top-left-radius: 10px; /* Add border radius to the top-left corner */
+    border-top-right-radius: 10px; /* Add border radius to the top-right corner */
+}
+
+.accordion-item:last-child .accordion-button {
+    border-bottom-left-radius: 10px; /* Add border radius to the bottom-left corner */
+    border-bottom-right-radius: 10px; /* Add border radius to the bottom-right corner */
+}
+
+.latest-blogs {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+
+        .latest-blogs .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .latest-blogs .card-img-top {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .latest-blogs .card-body {
+            text-align: center;
+        }
+
+        .latest-blogs .card-title {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .latest-blogs .btn-primary {
+            background-color: gold;
+            border-color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .latest-blogs .card {
+                margin-bottom: 30px;
+            }
+        }
+        .why-uniplus {
+            background-color: #e5f3fb; /* Background color for the section */
+        }
+
+        .why-uniplus .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .why-uniplus .icon {
+            font-size: 2.5em;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .why-uniplus .card-title {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .why-uniplus .card-text {
+            color: #6c757d;
+        }
+
+        .why-uniplus .btn-primary {
+            background-color: #516beb;
+            border-color: #516beb;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .why-uniplus .card {
+                margin-bottom: 30px;
+            }
+        }
+        .logo-section {
+            background: linear-gradient(to right, #e5f3fb, #f9f9f9); /* Gradient background */
+        }
+
+        .logo-section img {
+            max-width: 100px; /* Adjust the max-width as needed */
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .logo-section .col-2 {
+                margin-bottom: 20px;
+            }
+        }
+
+        .student-card {
+            position: relative;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding-top: 50px;
+            background-color: #f5f9fc;
+        }
+
+        .student-card .card-img-top {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-card .card-body {
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .student-card .card-title {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        .student-card .card-subtitle {
+            font-size: 1em;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .student-card {
+                margin-bottom: 30px;
+            }
+        }
+        .heading-section {
+            text-align: center;
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .heading-section h2 {
+            display: inline-block;
+            background: #fff;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            font-size: 1.5em;
+        }
+
+        .heading-section::before, 
+        .heading-section::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+        }
+
+        .heading-section::before {
+            left: 0;
+        }
+
+        .heading-section::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+        }
+        .subscribe-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #e5f3fb; */
+}
+
+.subscribe-form {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subscribe-form input {
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    flex: 1;
+    border-radius: 50px 0 0 50px;
+}
+
+.subscribe-form button {
+    border: none;
+    padding: 10px 20px;
+    background-color: #516beb;
+    color: #fff;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.subscribe-form button:hover {
+    background-color: #4059b5;
+}
+
+@media (max-width: 768px) {
+    .subscribe-form {
+        flex-direction: row;
+        width: 200%;
+        border-radius: 50px;
+    }
+
+    .subscribe-form input {
+        border-radius: 50px 0 0 50px;
+    }
+
+    .subscribe-form button {
+        border-radius: 0 50px 50px 0;
+    }
+}
+
+</style>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="Harish's logo Design-7.png" alt="Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu mega-menu p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" type="button">Login</button>
+                    <button class="btn btn-outline-light" type="button">Signup</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    <section class="section-next" style="background-color: #8BACBC; margin-top: 70px;">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-6 pt-5">
+                    <div class="section-next-text text-center text-md-start">
+                        <h1><span>Unlock Your Potential.</span><br><span>Pursue Your Dreams.</span><br><span>Study Abroad with</span><br><span style="color: black;">Uniplus.</span></h1>
+                        <p class="paragraph">We guide ambitious students like you <br> towards acceptance at prestigious <br> universities worldwide.</p>
+                        <a href="#" class="btn-custom">Explore Program</a>
+
+                    </div>
+                </div>
+                <div class="col-md-6 pt-5">
+                    <div class="section-next-image text-center">
+                        <img src="Ellipse 20.png" alt="Round Image" class="img-fluid rounded-circle">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-uniplus container py-5 mt-5">
+        <div class="container text-center">
+            <h2 class="mb-5">Why UNIPLUS</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 h-100">
+                        <div class="icon mb-3">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h5 class="card-title">Global Network</h5>
+                        <p class="card-text">We have extensive partnerships with universities across the globe, giving you access to a wider range of opportunities.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 h-100">
+                        <div class="icon mb-3">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h5 class="card-title">Personalized Approach</h5>
+                        <p class="card-text">We tailor our services to your individual needs and aspirations, ensuring a successful application.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 h-100">
+                        <div class="icon mb-3">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h5 class="card-title">Scholarship Support</h5>
+                        <p class="card-text">We assist you in finding and applying for scholarships to minimize financial burden.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn mt-4">Schedule a Free Consultation</button>
+        </div>
+    </section>
+    <div class="container" style="margin-top: 70px;">
+<h2 class="text-center">We partnered with best universities </h2>
+    </div>
+
+   
+    <section class="logo-section container py-5 mt-5" >
+        <div class="container">
+            <div class="row text-center justify-content-center">
+                <div class="col-md-2">
+                    <img src="Uni_Oxford_logo 1.png" alt="Logo 1" class="img-fluid">
+                </div>
+                <div class="col-md-2">
+                    <img src="Uni_Oxford_logo 1.png" alt="Logo 2" class="img-fluid">
+                </div>
+                <div class="col-md-2">
+                    <img src="Uni_Oxford_logo 1.png" alt="Logo 3" class="img-fluid">
+                </div>
+                <div class="col-md-2">
+                    <img src="Uni_Oxford_logo 1.png" alt="Logo 4" class="img-fluid">
+                </div>
+                <div class="col-md-2">
+                    <img src="Uni_Oxford_logo 1.png" alt="Logo 5" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-countries" style="background-color: white; padding: 80px 20px;">
+        <div class="container">
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-6">
+                    <h2 class="section-title">Click on Your Desired Country</h2>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#" class="view-all">View All</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card country-card text-center">
+                        <img src="Frame 13.png" alt="Country Image" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title country-name">Germany</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card country-card text-center">
+                        <img src="Frame 14.png" alt="Country Image" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title country-name">Canada</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card country-card text-center">
+                        <img src="Frame 15.png" alt="Country Image" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title country-name">Ireland</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card country-card text-center">
+                        <img src="Frame 16.png" alt="Country Image" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title country-name">France</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="heading-section">
+        <h2>Our Success Story</h2>
+    </section>
+    <section class="student-section py-5 mt-5">
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card student-card">
+                        <img src="Ellipse 11.png" class="card-img-top" alt="Student 1">
+                        <div class="card-body">
+                            <h5 class="card-title">David</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">University of Oxford</h6>
+                            <p class="card-text">A talented artist, aspired to attend Berklee College of Arts. Uniplus's consultants helped him refine his portfolio and application essays, leading to his acceptance into their competitive Performance program.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card student-card">
+                        <img src="Ellipse 12.png" class="card-img-top" alt="Student 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Sarah</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">University of Oxford</h6>
+                            <p class="card-text">A passionate environmentalist, dreamt of studying at the University of Oxford. With Uniplus's guidance, she crafted a compelling application highlighting her research experience and secured a place in their prestigious Ecology program.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card student-card">
+                        <img src="Ellipse 13.png" class="card-img-top" alt="Student 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Isabelle</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Po Paris University</h6>
+                            <p class="card-text">Fascinated by international relations, aimed to study at Sciences Po Paris. Uniplus's personalized approach helped her excel in the language tests and prepare for the rigorous interview process, ultimately resulting in her admission.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-dream">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-12">
+                    <h2 class="dream-heading">Dreaming of studying abroad? <br>Start planning today!</h2>
+                   <br> <a href="#" class="btn btn-book-call" style="background-color: gold;">
+                        Book a Free Expert Call
+                        <i class="icon-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="latest-blogs mt-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Latest Blogs</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="blog_1.jpeg" class="card-img-top" alt="Blog Image 1">
+                        <div class="card-body">
+                            <h5 class="card-title">5 Scholarships Every International Student Needs to Know About</h5>
+                            <a href="#" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="blog_2.jpeg" class="card-img-top" alt="Blog Image 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Acing Your University Interview: Tips and Strategies</h5>
+                            <a href="#" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="blog_3.jpeg" class="card-img-top" alt="Blog Image 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Life as an International Student: What to Expect</h5>
+                            <a href="#" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="blog_4.jpeg" class="card-img-top" alt="Blog Image 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Internship Opportunities Abroad: Gain Valuable Work Experience</h5>
+                            <a href="#" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">FAQs</h2>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        What are the benefits of studying abroad?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Studying abroad offers numerous benefits including exposure to new cultures, learning new languages, gaining global perspectives, and enhancing career opportunities.
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other accordion items -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        How can Study Abroad Consultants help me?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Study Abroad Consultants can help by providing guidance on choosing the right program, assisting with application processes, and offering insights on visa requirements and accommodation options.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        How do I choose the right program for me?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Choosing the right program involves considering your career goals, interests, budget, and preferred study destinations. Consulting with advisors and researching universities can also help.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        What scholarships and financial aid options are available?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        There are various scholarships and financial aid options available including merit-based scholarships, need-based aid, and grants from universities, governments, and private organizations.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <br>
+
+    
+    <section class="section-newsletter mt-5">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 text-center text-md-start col-md-6">
+                    <h2>Newsletter</h2>
+                    <p>Subscribe to our newsletter for valuable insights,<br> upcoming events, and exclusive scholarship <br> opportunities delivered directly to your inbox.</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <section class="subscribe-section">
+                        <form class="subscribe-form">
+                            <input type="email" placeholder="Enter your Email" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </section>
+                </div>
+                <img src="Frame 75.png" alt="">
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Phone</a></li>
+                        <li><a href="#">Address</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Offering</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Free IELTS</a></li>
+                        <li><a href="#">Call with Expert</a></li>
+                        <li><a href="#">Scholarships</a></li>
+                        <li><a href="#">Expert Guide</a></li>
+                        <li><a href="#">Personal Guide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Study Abroad</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Study in Uk</a></li>
+                        <li><a href="#">Study in Canada</a></li>
+                        <li><a href="#">Study in Germany</a></li>
+                        <li><a href="#">Study in Ireland</a></li>
+                        <li><a href="#">Study in Australlia</a></li>
+                        <li><a href="#">Study in USA</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-md-2">
+                    <h5>Top Universities</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Study in Uk</a></li>
+                        <li><a href="#">Study in Canada</a></li>
+                        <li><a href="#">Study in Germany</a></li>
+                        <li><a href="#">Study in Ireland</a></li>
+                        <li><a href="#">Study in Australlia</a></li>
+                        <li><a href="#">Study in USA</a></li>
+                   
+                        </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Test Prep</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">IELTS</a></li>
+                        <li><a href="#">GMAT</a></li>
+                        <li><a href="#">GRE</a></li>
+                        <li><a href="#">TOEFL</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Latest Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Help & Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <h5>Connect with Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom mt-4">
+                <div class="universities-az">
+                    <span>Universities</span>
+                    <span>A</span>
+                    <span>B</span>
+                    <span>C</span>
+                    <span>D</span>
+                    <span>E</span>
+                    <span>F</span>
+                    <span>G</span>
+                    <span>H</span>
+                    <span>I</span>
+                    <span>J</span>
+                    <span>K</span>
+                    <span>L</span>
+                    <span>M</span>
+                    <span>N</span>
+                    <span>O</span>
+                    <span>P</span>
+                    <span>Q</span>
+                    <span>R</span>
+                    <span>S</span>
+                    <span>T</span>
+                    <span>U</span>
+                    <span>V</span>
+                    <span>W</span>
+                    
+                </div>
+               
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+  var navbar = document.getElementById('navbar');
+  var navbarCollapse = document.getElementById('navbarSupportedContent');
+  var navbarToggler = document.querySelector('.navbar-toggler');
+
+  // Function to handle scroll event
+  function handleScroll() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+
+  // Function to handle toggle event
+  function handleToggle() {
+    if (!navbarCollapse.classList.contains('show')) {
+      navbar.classList.add('toggled');
+    } else {
+      if (window.scrollY < 50) {
+        navbar.classList.remove('toggled');
+      }
+    }
+  }
+
+  // Function to handle toggle close event
+  function handleToggleClose() {
+    if (!navbarCollapse.classList.contains('show')) {
+      if (window.scrollY < 50) {
+        navbar.classList.remove('toggled');
+      }
+    }
+  }
+
+  // Attach event listeners
+  window.addEventListener('scroll', handleScroll);
+  navbarToggler.addEventListener('click', handleToggle);
+  navbarCollapse.addEventListener('hidden.bs.collapse', handleToggleClose);
+});
+
+
+    </script>
+</body>
+</html>
+
+
+   
